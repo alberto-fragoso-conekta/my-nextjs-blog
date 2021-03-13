@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styled from "@emotion/styled";
+import { InferGetStaticPropsType } from "next";
 
 const Container = styled.div`
   align-items: center;
@@ -25,19 +26,65 @@ const BlogTitle = styled.h1`
   margin: 0;
 `;
 
+const List = styled.ul`
+  list-style: square;
+`;
+
+const ListItem = styled.li`
+  color: #252525;
+  cursor: pointer;
+  margin: 40px 0;
+  padding: 10px;
+  text-transform: capitalize;
+  &:hover {
+    background: #f0f0f0;
+  }
+`;
+
+const PostTitle = styled.h2`
+  font-size: 24px;
+  margin: 0;
+`;
+
 const TITLE: string = "Next.js + TypeScript";
 
-export default function Home() {
-  return (
-    <Container>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+type Post = {
+  body: string;
+  id: number;
+  title: string;
+  userId: number;
+};
 
-      <Main>
-        <BlogTitle>{TITLE}</BlogTitle>
-      </Main>
-    </Container>
-  );
-}
+const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
+  <Container>
+    <Head>
+      <title>Create Next App</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+
+    <Main>
+      <BlogTitle>{TITLE}</BlogTitle>
+    </Main>
+
+    <List>
+      {posts.map(({ id: POST_ID, title: POST_TITLE }) => (
+        <ListItem key={POST_ID}>
+          <PostTitle>{POST_TITLE}</PostTitle>
+        </ListItem>
+      ))}
+    </List>
+  </Container>
+);
+
+export default Home;
+
+export const getStaticProps = async () => {
+  const res = await fetch("http://jsonplaceholder.typicode.com/posts");
+  const posts: Post[] = await res.json();
+
+  return {
+    props: {
+      posts
+    }
+  };
+};
