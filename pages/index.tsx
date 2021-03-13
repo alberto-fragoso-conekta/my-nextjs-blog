@@ -48,7 +48,7 @@ const PostTitle = styled.h2`
 
 const TITLE: string = "Next.js + TypeScript";
 
-type Post = {
+export type Post = {
   body: string;
   id: number;
   title: string;
