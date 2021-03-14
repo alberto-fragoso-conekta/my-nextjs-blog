@@ -1,4 +1,4 @@
-import { Article } from "@components/Article";
+import { Article, BlogImage } from "@components/Article";
 import {
   GetStaticPaths,
   GetStaticPropsContext,
@@ -12,6 +12,7 @@ const BlogPost = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Article>
       <h1>{POST_TITLE}</h1>
+      <BlogImage src="/code.jpeg" alt={POST_TITLE} />
       <p>{POST_BODY}</p>
     </Article>
   );
