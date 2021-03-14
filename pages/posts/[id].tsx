@@ -1,3 +1,4 @@
+import CommentsForm from "@components/CommentsForm";
 import Head from "next/head";
 import { Article, BlogImage } from "@components/Article";
 import {
@@ -18,6 +19,7 @@ const BlogPost = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <h1>{POST_TITLE}</h1>
       <BlogImage src="/code.jpeg" alt={POST_TITLE} />
       <p>{POST_BODY}</p>
+      <CommentsForm />
     </Article>
   );
 };
