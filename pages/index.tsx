@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import styled from "@emotion/styled";
 import { InferGetStaticPropsType } from "next";
 
@@ -69,7 +70,9 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <List>
       {posts.map(({ id: POST_ID, title: POST_TITLE }) => (
         <ListItem key={POST_ID}>
-          <PostTitle>{POST_TITLE}</PostTitle>
+          <Link href="/posts/[id]" as={`/posts/${POST_ID}`}>
+            <PostTitle>{POST_TITLE}</PostTitle>
+          </Link>
         </ListItem>
       ))}
     </List>
