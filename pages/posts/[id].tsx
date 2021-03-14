@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Article, BlogImage } from "@components/Article";
 import {
   GetStaticPaths,
@@ -11,6 +12,9 @@ const BlogPost = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <Article>
+      <Head>
+        <title>{POST_TITLE}</title>
+      </Head>
       <h1>{POST_TITLE}</h1>
       <BlogImage src="/code.jpeg" alt={POST_TITLE} />
       <p>{POST_BODY}</p>
